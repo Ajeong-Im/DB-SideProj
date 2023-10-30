@@ -1,8 +1,19 @@
-const CarList = () => {
+import { Link } from "react-router-dom";
+
+const Product = () => {
   return (
     <>
-      <h3> Products </h3>
+      <h3>MainPage</h3>
+      <ul>
+        <Link to={"/carlist/1"}>
+          <li>1번 차</li>
+        </Link>
+        <Link to={"/carlist/2"}>
+          <li>2번 차</li>
+        </Link>
+      </ul>
     </>
   );
 };
-export default CarList;
+
+export default Product;
