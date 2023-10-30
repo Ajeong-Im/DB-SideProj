@@ -12,7 +12,7 @@ const Main = () => {
             Admin Page
           </div>
         </div>
-        <div className="flex justify-center ml-2">
+        <div className="flex justify-center ml-4">
           <img
             className="max-w-full max-h-full"
             src="https://i.ibb.co/2YZrwY0/mainCar.png"
@@ -70,7 +70,7 @@ const Main = () => {
               />
             </Link>
           </div>
-          <div className="">
+          <div>
             <Link to="/repair">
               <img
                 src="https://i.ibb.co/mb77HHX/maintenance.png"
