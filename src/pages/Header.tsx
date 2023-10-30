@@ -4,7 +4,9 @@ const Header = () => {
   return (
     <>
       <Link to="/">
-        <h1>Header</h1>
+        <div className="bg-slate-300">
+          <h1>Header</h1>
+        </div>
       </Link>
     </>
   );

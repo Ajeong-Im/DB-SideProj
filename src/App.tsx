@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./Main";
 import Product from "./Product";
-import Header from "./Header";
+import Header from "./pages/Header";
 
 const App = () => {
   return (
