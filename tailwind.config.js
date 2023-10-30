@@ -3,5 +3,16 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".hover11:hover": {
+          opacity: "1",
+          WebkitAnimation: "flash 1.5s",
+          animation: "flash 1.5s",
+        },
+      };
+      addUtilities(newUtilities, ["hover"]);
+    },
+  ],
 };

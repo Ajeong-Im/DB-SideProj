@@ -12,7 +12,7 @@ const Main = () => {
             Admin Page
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center ml-2">
           <img
             className="max-w-full max-h-full"
             src="https://i.ibb.co/2YZrwY0/mainCar.png"
@@ -25,34 +25,58 @@ const Main = () => {
         <div className="h-65 grid grid-row-3 gap-4 content-center ml-10">
           <div>
             <Link to="/rentalstatus">
-              <img src="https://i.ibb.co/VJ4YZp4/rental-status.png"></img>
+              <img
+                src="https://i.ibb.co/VJ4YZp4/rental-status.png"
+                className="hover:opacity-75 transition-opacity duration-300"
+                alt="Rental Status"
+              />
             </Link>
           </div>
           <div>
             <Link to="/guest">
-              <img src="https://i.ibb.co/N7HWD2x/guest.png"></img>
+              <img
+                src="https://i.ibb.co/N7HWD2x/guest.png"
+                className="hover:opacity-75 transition-opacity duration-300"
+                alt="Rental Status"
+              />
             </Link>
           </div>
           <div>
             <Link to="/office">
-              <img src="https://i.ibb.co/h2w7V4y/office.png"></img>
+              <img
+                src="https://i.ibb.co/h2w7V4y/office.png"
+                className="hover:opacity-75 transition-opacity duration-300"
+                alt="Rental Status"
+              />
             </Link>
           </div>
         </div>
         <div className="h-65 grid grid-row-3 gap-4 content-center mr-10">
           <div>
             <Link to="/product">
-              <img src="https://i.ibb.co/Wf6J4qZ/vehicle.png"></img>
+              <img
+                src="https://i.ibb.co/Wf6J4qZ/vehicle.png"
+                className="hover:opacity-75 transition-opacity duration-300"
+                alt="Rental Status"
+              />
             </Link>
           </div>
           <div>
             <Link to="/employee">
-              <img src="https://i.ibb.co/W28RQkB/employee.png"></img>
+              <img
+                src="https://i.ibb.co/W28RQkB/employee.png"
+                className="hover:opacity-75 transition-opacity duration-300"
+                alt="Rental Status"
+              />
             </Link>
           </div>
-          <div>
+          <div className="">
             <Link to="/repair">
-              <img src="https://i.ibb.co/mb77HHX/maintenance.png"></img>
+              <img
+                src="https://i.ibb.co/mb77HHX/maintenance.png"
+                className="hover:opacity-75 transition-opacity duration-300"
+                alt="Rental Status"
+              />
             </Link>
           </div>
         </div>
