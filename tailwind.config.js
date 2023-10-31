@@ -14,12 +14,12 @@ module.exports = {
         ".grayscale": {
           WebkitFilter: "grayscale(0)",
           filter: "grayscale(0)",
-          WebkitTransition: ".2s ease-in-out",
-          transition: ".2s ease-in-out",
+          WebkitTransition: ".3s ease-in-out",
+          transition: ".3s ease-in-out",
         },
         ".grayscale:hover": {
-          WebkitFilter: "grayscale(100%)",
-          filter: "grayscale(100%)",
+          WebkitFilter: "grayscale(80%)",
+          filter: "grayscale(80%)",
         },
       };
       addUtilities(newUtilities, ["responsive", "hover"]);
