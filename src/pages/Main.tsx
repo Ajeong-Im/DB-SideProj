@@ -70,7 +70,7 @@ const Main = () => {
               />
             </Link>
           </div>
-          <div className="">
+          <div>
             <Link to="/repair">
               <img
                 src="https://i.ibb.co/3S3R2qb/Group-1000002267.png"
