@@ -53,7 +53,7 @@ const Main = () => {
         </div>
         <div className="h-65 grid grid-row-3 gap-4 content-center mr-10">
           <div>
-            <Link to="/product">
+            <Link to="/carlist">
               <img
                 src="https://i.ibb.co/p0X11Qx/Group-1000002264.png"
                 className="grayscale hover:grayscale:hover"

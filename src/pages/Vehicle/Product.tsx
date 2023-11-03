@@ -1,19 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Product = () => {
-  return (
-    <>
-      <h3>여긴 Vehicle Page</h3>
-      <ul>
-        <Link to={"/carlist/1"}>
-          <li>1번 차</li>
-        </Link>
-        <Link to={"/carlist/2"}>
-          <li>2번 차</li>
-        </Link>
-      </ul>
-    </>
-  );
+  return <h3>차 설명 페이지</h3>;
 };
 
 export default Product;
