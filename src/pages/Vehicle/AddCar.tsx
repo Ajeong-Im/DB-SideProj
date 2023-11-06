@@ -3,22 +3,24 @@ import { Link } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { domain } from "../../domain/domain";
 
-function AddGuest() {
-  const [guest_name, setName] = useState("");
-  const [guest_phone, setPhone] = useState("");
-  const [guest_email, setEmail] = useState("");
-  const [guest_license, setlicense] = useState("");
+function AddCar() {
+  const [car_name, setName] = useState(""); // 차량명
+  const [car_brand, setBrand] = useState(""); // 브랜드
+  const [car_maxnum, setMaxnum] = useState(""); // 최대 탑승 인원
+  const [car_drivdist, setDrivdist] = useState(""); // 주행거리
+  const [car_cost, setCost] = useState(""); // 하루 대여 가격
 
   const user_uuid = localStorage.getItem("user_uuid");
 
   function sendDataToServer(): Promise<AxiosResponse> {
-    const apiUrl = `${domain}:8000/api/v1/guests/add/${user_uuid}/`;
+    const apiUrl = `${domain}:8000/api/v1/cars/add/${user_uuid}/`;
 
     const data = {
-      guest_name,
-      guest_phone,
-      guest_email,
-      guest_license,
+      car_name,
+      car_brand,
+      car_maxnum,
+      car_drivdist,
+      car_cost,
     };
 
     return axios.post(apiUrl, data);
@@ -38,70 +40,81 @@ function AddGuest() {
     <div className="flex justify-center items-center ml-10px h-60px">
       <div>
         <h2 className="font-bold text-center text-[40px] mb-6 mt-20">
-          새 고객 등록
+          새 차량 등록
         </h2>
         <div className="mt-3 space-y-3">
           <div className="text-left">
-            <label className="label text-[18px] font-medium">이름</label>
+            <label className="label text-[18px] font-medium">차량 종류</label>
             <div className="flex space-x-3">
               <input
-                type="name"
+                type="text"
                 className="w-80 h-10 border border-gray-300 shadow-md rounded-md text-sm pl-4"
-                value={guest_name}
-                placeholder="홍길동"
+                value={car_name}
+                placeholder="소나타"
                 onChange={(event) => setName(event.target.value)}
               />
             </div>
           </div>
           <div className="text-left">
-            <label className="label text-[18px] font-medium">전화번호</label>
+            <label className="label text-[18px] font-medium">차량 브랜드</label>
             <div className="flex space-x-3">
               <input
-                type="string"
+                type="text"
                 className="w-full h-10 border border-gray-300 shadow-md rounded-md text-sm pl-4"
-                value={guest_phone}
-                placeholder="010-0000-0000"
-                onChange={(event) => setPhone(event.target.value)}
-              />
-            </div>
-          </div>
-          <div className="text-left">
-            <label className="label text-[18px] font-medium">Email</label>
-            <div className="flex space-x-3">
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="w-full h-10 border border-gray-300 shadow-md rounded-md text-sm pl-4"
-                value={guest_email}
-                placeholder="name@company.com"
-                onChange={(event) => setEmail(event.target.value)}
+                value={car_brand}
+                placeholder="현대"
+                onChange={(event) => setBrand(event.target.value)}
               />
             </div>
           </div>
           <div className="text-left">
             <label className="label text-[18px] font-medium">
-              운전면허번호
+              최대 탑승 인원
             </label>
             <div className="flex space-x-3">
               <input
-                type="string"
-                className="w-full h-10 border border-gray-300 shadow-md rounded-md text-sm pl-4 mb-4"
-                value={guest_license}
-                placeholder="00-00-000000-00"
-                onChange={(event) => setlicense(event.target.value)}
+                type="number"
+                className="w-full h-10 border border-gray-300 shadow-md rounded-md text-sm pl-4"
+                value={car_maxnum}
+                onChange={(event) => setMaxnum(event.target.value)}
+              />
+            </div>
+          </div>
+          <div className="text-left">
+            <label className="label text-[18px] font-medium">주행 거리</label>
+            <div className="flex space-x-3">
+              <input
+                type="text"
+                className="w-full h-10 border border-gray-300 shadow-md rounded-md text-sm pl-4"
+                value={car_drivdist}
+                placeholder="5000km"
+                onChange={(event) => setDrivdist(event.target.value)}
+              />
+            </div>
+          </div>
+          <div className="text-left">
+            <label className="label text-[18px] font-medium">
+              하루 대여 가격
+            </label>
+            <div className="flex space-x-3">
+              <input
+                type="text"
+                className="w-full h-10 border border-gray-300 shadow-md rounded-md text-sm pl-4"
+                value={car_cost}
+                placeholder="10,000"
+                onChange={(event) => setCost(event.target.value)}
               />
             </div>
           </div>
         </div>
         <div>
-          <Link to="/guest">
+          <Link to="/car">
             <button
               type="submit"
               className="w-full mt-4 bg-slate-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
               onClick={handleSubmitModal}
             >
-              고객 등록
+              차량 등록
             </button>
           </Link>
         </div>
@@ -110,4 +123,4 @@ function AddGuest() {
   );
 }
 
-export default AddGuest;
+export default AddCar;
