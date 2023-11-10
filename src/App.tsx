@@ -11,6 +11,7 @@ import OfficePage from "./pages/Office/OfficePage";
 import RepairPage from "./pages/Repair/RepairPage";
 import AddGuest from "./pages/Guest/AddGuest";
 import AddCar from "./pages/Vehicle/AddCar";
+import AddEmployee from "./pages/Employee/AddEmployee";
 
 const App = () => {
   return (
@@ -27,7 +28,8 @@ const App = () => {
           <Route path="/carlist" element={<CarList />}></Route>
           <Route path="/product/*" element={<Product />}></Route>
           <Route path="/addguest" element={<AddGuest />}></Route>
-          <Route path="addcar" element={<AddCar />}></Route>
+          <Route path="/addcar" element={<AddCar />}></Route>
+          <Route path="/addemployee" element={<AddEmployee />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,20 @@
 import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const CarList = () => {
+  const [carList, setCarList] = useState([]);
+
+  const getCarList = async () => {
+    const resp = (await axios.get("http://localhost:8000/api/v1/cars/")).data;
+    setCarList(resp.data);
+    console.log(carList);
+  };
+
+  useEffect(() => {
+    getCarList();
+  }, []);
+
   return (
     <>
       <h3>여긴 Vehicle Page</h3>
