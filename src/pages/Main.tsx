@@ -35,7 +35,7 @@ const Main = () => {
         <div>
           <Link to="/office">
             <img
-              src="https://i.ibb.co/x8rnqvg/Group-1000002265.png"
+              src="https://i.ibb.co/kDZzbg0/office.png"
               className="grayscale hover:grayscale:hover"
               alt="Rental Status"
             />
