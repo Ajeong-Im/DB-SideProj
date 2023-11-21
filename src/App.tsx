@@ -6,11 +6,14 @@ import CarList from "./pages/Vehicle/CarList";
 import Main from "./pages/Main";
 import RentalStatusPage from "./pages/RentalStatus/RentalStatusPage";
 import GuestPage from "./pages/Guest/GuestPage";
-import EmployeePage from "./pages/Employee/EmployeePage";
 import OfficePage from "./pages/Office/OfficePage";
 import RepairPage from "./pages/Repair/RepairPage";
 import AddCar from "./pages/Vehicle/AddCar";
 import AddEmployee from "./pages/Employee/AddEmployee";
+import OfficeAdd from "./pages/Office/OfficeAdd";
+import OfficeDetail from "./pages/Office/OfficeDetail";
+import CarDetail from "./pages/Vehicle/CarDetail";
+import OfficeModify from "./pages/Office/OfficeModify";
 
 const App = () => {
   return (
@@ -21,13 +24,17 @@ const App = () => {
           <Route path="/" element={<Main />}></Route>
           <Route path="/rentalstatus" element={<RentalStatusPage />}></Route>
           <Route path="/guest" element={<GuestPage />}></Route>
-          <Route path="/employee" element={<EmployeePage />}></Route>
           <Route path="/office" element={<OfficePage />}></Route>
           <Route path="/repair" element={<RepairPage />}></Route>
           <Route path="/carlist" element={<CarList />}></Route>
           <Route path="/product/*" element={<Product />}></Route>
-          <Route path="/addcar" element={<AddCar />}></Route>
+          <Route path="/car/add" element={<AddCar />}></Route>
           <Route path="/addemployee" element={<AddEmployee />}></Route>
+          <Route path="/office/add" element={<OfficeAdd />}></Route>
+          <Route path="/office/:office_id" element={<OfficeDetail />} />
+          <Route path="/employee/register/:office_id" element={<AddEmployee />} />
+          <Route path="/car/:car_id" element={<CarDetail />} />
+          <Route path="/office/modify/:office_id" element={<OfficeModify />} />
         </Routes>
       </BrowserRouter>
     </div>

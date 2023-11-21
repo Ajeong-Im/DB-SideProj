@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const EmployeePage = () => {
+const EmployeeDetail = () => {
   return (
     <>
       <h3>여긴 Employee Page</h3>
@@ -8,4 +8,4 @@ const EmployeePage = () => {
   );
 };
 
-export default EmployeePage;
+export default EmployeeDetail;

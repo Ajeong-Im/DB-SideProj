@@ -1,39 +1,74 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { domain } from "../../domain/domain";
+import { Button, Paper, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 
-const officeListData = [
-  {
-    id: 1,
-    office_name: "강남점",
-    office_tel: "010-1234-5678",
-    office_addr: "서울시 강남구",
-  },
-  {
-    id: 2,
-    office_name: "역삼점",
-    office_tel: "010-8765-4321",
-    office_addr: "서울시 역삼동",
-  },
-];
+interface Office {
+  id: number;
+  name: string;
+  branch_phone_number: string;
+  address: string;
+}
 
 const OfficePage = () => {
-  const [officeList, setOfficeList] = useState([]);
+  const [offices, setOffices] = useState<Office[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchOffices = async () => {
+      try {
+        const response = await axios.get(`${domain}:8000/api/employees/branch`);
+        setOffices(response.data);
+      } catch (error) {
+        console.error('Error fetching office data:', error);
+      }
+    };
+
+    fetchOffices();
+  }, []);
+
+  const handleRowClick = (officeId: number) => {
+    navigate(`/office/${officeId}`);
+  };
+
+  const handleAddOffice = () => {
+    navigate("/office/add");
+  }
 
   return (
-    <>
-      <Link to={"/addoffice"}>
-        <button className="bg-orange-200 mb-3 mt-3">지점 추가</button>
-      </Link>
-      <h3 className="text-lg w-full bg-yellow-200">지점 목록</h3>
-      <ul>
-        {officeListData.map((office) => (
-          <Link key={office.id} to={`/office/${office.id}`}>
-            <li>{`${office.office_name} : ${office.office_tel} 주소: ${office.office_addr}`}</li>
-          </Link>
-        ))}
-      </ul>
-    </>
+    <Paper style={{ width: '100%', overflowX: 'auto' }}>
+      <Button 
+        variant="contained" 
+        color="primary" 
+        onClick={handleAddOffice}
+        style={{ margin: '20px' }}
+      >
+        지점 추가
+      </Button>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>지점 이름</TableCell>
+            <TableCell>지점 전화번호</TableCell>
+            <TableCell>지점 주소</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {offices.map((office) => (
+            // Add onClick event to the TableRow
+            <TableRow key={office.id} onClick={() => handleRowClick(office.id)} style={{ cursor: 'pointer' }}>
+              <TableCell>{office.id}</TableCell>
+              <TableCell>{office.name}</TableCell>
+              <TableCell>{office.branch_phone_number}</TableCell>
+              <TableCell>{office.address}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Paper>
   );
 };
 
