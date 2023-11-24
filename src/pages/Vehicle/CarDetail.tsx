@@ -69,6 +69,11 @@ const CarDetail = () => {
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
       <Typography variant="h4">{carDetails.car_type.brand}</Typography>
+      <img
+        src="https://i.ibb.co/RP3GKGW/image.png"
+        alt="office"
+        style={{ width: "200px", height: "200px", margin: "20px 0" }}
+      />
       <Typography variant="body1">Size: {carDetails.car_type.size}</Typography>
       <Typography variant="body1">
         Mileage: {carDetails.car_type.mileage} km

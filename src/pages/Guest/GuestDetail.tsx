@@ -63,6 +63,11 @@ const GuestDetail = () => {
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
       <Typography variant="h4">{guestDetails.name}</Typography>
+      <img
+        src="https://i.ibb.co/zWggJNh/image.png"
+        alt="office"
+        style={{ width: "200px", height: "200px", margin: "20px 0" }}
+      />
       <Typography variant="body1">ID: {guestDetails.id}</Typography>
       <Typography variant="body1">
         Phone Number: {guestDetails.phone_number}
