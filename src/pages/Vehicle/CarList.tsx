@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Switch, FormControlLabel } from '@mui/material';
-import { domain } from '../../domain/domain';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Switch,
+  FormControlLabel,
+} from "@mui/material";
+import { domain } from "../../domain/domain";
 
 interface ApiResponse {
   id: number;
   car_type: {
     brand: string;
-    size: 'small' | 'medium' | 'large';
+    size: "small" | "medium" | "large";
     availability: boolean;
   };
   branch_name: string;
@@ -22,25 +32,32 @@ const CarList = () => {
     const fetchCars = async () => {
       try {
         // Notice how we're not passing `carList` here anymore
-        const response = await axios.get<ApiResponse[]>(`${domain}:8000/api/cars`);
+        const response = await axios.get<ApiResponse[]>(
+          `${domain}:8000/api/cars/`
+        );
         console.log(response.data);
         setCarList(response.data); // API response is set to state
       } catch (error) {
-        console.error('Error fetching cars', error);
+        console.error("Error fetching cars", error);
       }
     };
-  
+
     fetchCars();
   }, []); // The empty array ensures this effect runs once after initial render
-  
 
-  const filteredCars = carList.filter((car) => !filterAvailable || car.car_type.availability);
-
+  const filteredCars = carList.filter(
+    (car) => !filterAvailable || car.car_type.availability
+  );
 
   return (
     <Paper>
       <FormControlLabel
-        control={<Switch checked={filterAvailable} onChange={(e) => setFilterAvailable(e.target.checked)} />}
+        control={
+          <Switch
+            checked={filterAvailable}
+            onChange={(e) => setFilterAvailable(e.target.checked)}
+          />
+        }
         label="이용 가능한 차량만 보기"
       />
       <TableContainer component={Paper}>
@@ -63,7 +80,9 @@ const CarList = () => {
                 <TableCell>{car.car_type.brand}</TableCell>
                 <TableCell>{car.car_type.size}</TableCell>
                 <TableCell>{car.branch_name}</TableCell>
-                <TableCell>{car.car_type.availability ? '이용 가능' : '이용 불가능'}</TableCell>
+                <TableCell>
+                  {car.car_type.availability ? "이용 가능" : "이용 불가능"}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

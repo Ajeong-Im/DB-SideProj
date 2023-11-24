@@ -85,6 +85,7 @@ const CarDetail = () => {
         Available: {carDetails.car_type.availability ? "O" : "X"}
       </Typography>
       <Divider style={{ margin: "20px 0" }} />
+      <Typography variant="h5">Options</Typography>
       <Typography variant="body1">
         Air Conditioner:{" "}
         {carDetails.car_type.options.airconditioner ? "O" : "X"}
