@@ -77,23 +77,24 @@ const CarDetail = () => {
         Rental Price: ${carDetails.car_type.rental_price}
       </Typography>
       <Typography variant="body1">
-        Available: {carDetails.car_type.availability ? "Yes" : "No"}
+        Available: {carDetails.car_type.availability ? "O" : "X"}
       </Typography>
+      <Divider style={{ margin: "20px 0" }} />
       <Typography variant="body1">
         Air Conditioner:{" "}
-        {carDetails.car_type.options.airconditioner ? "Yes" : "No"}
+        {carDetails.car_type.options.airconditioner ? "O" : "X"}
       </Typography>
       <Typography variant="body1">
-        Heated Seat: {carDetails.car_type.options.heatedseat ? "Yes" : "No"}
+        Heated Seat: {carDetails.car_type.options.heatedseat ? "O" : "X"}
       </Typography>
       <Typography variant="body1">
-        Sunroof: {carDetails.car_type.options.sunroof ? "Yes" : "No"}
+        Sunroof: {carDetails.car_type.options.sunroof ? "O" : "X"}
       </Typography>
       <Typography variant="body1">
-        Navigation: {carDetails.car_type.options.navigation ? "Yes" : "No"}
+        Navigation: {carDetails.car_type.options.navigation ? "O" : "X"}
       </Typography>
       <Typography variant="body1">
-        Blackbox: {carDetails.car_type.options.blackbox ? "Yes" : "No"}
+        Blackbox: {carDetails.car_type.options.blackbox ? "O" : "X"}
       </Typography>
       <Divider style={{ margin: "20px 0" }} />
 
