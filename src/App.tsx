@@ -14,6 +14,8 @@ import OfficeAdd from "./pages/Office/OfficeAdd";
 import OfficeDetail from "./pages/Office/OfficeDetail";
 import CarDetail from "./pages/Vehicle/CarDetail";
 import OfficeModify from "./pages/Office/OfficeModify";
+import EmployeeDetail from "./pages/Employee/EmployeeDetail";
+import CarModify from "./pages/Vehicle/CarModify";
 
 const App = () => {
   return (
@@ -36,7 +38,9 @@ const App = () => {
             element={<AddEmployee />}
           />
           <Route path="/car/:car_id" element={<CarDetail />} />
+          <Route path="employee/:employee_id" element={<EmployeeDetail />} />
           <Route path="/office/modify/:office_id" element={<OfficeModify />} />
+          <Route path="/car/modify/:car_id/*" element={<CarModify />} />
         </Routes>
       </BrowserRouter>
     </div>

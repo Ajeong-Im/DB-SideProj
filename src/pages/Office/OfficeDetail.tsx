@@ -59,6 +59,10 @@ const OfficeDetail = () => {
     navigate(`/employee/register/${office_id}`);
   };
 
+  const handleEmployeeClick = (employeeId: number) => {
+    navigate(`/employee/${employeeId}`);
+  };
+
   const handleCarClick = (carId: number) => {
     navigate(`/car/${carId}`);
   };
@@ -107,7 +111,11 @@ const OfficeDetail = () => {
       <Typography variant="h5">직원 목록</Typography>
       <List>
         {officeDetails.employees.map((employee) => (
-          <ListItem key={employee.employee_id}>
+          <ListItem
+            key={employee.employee_id}
+            onClick={() => handleEmployeeClick(employee.employee_id)}
+            style={{ cursor: "pointer" }}
+          >
             {employee.name} - {employee.position}
           </ListItem>
         ))}
