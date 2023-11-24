@@ -4,8 +4,12 @@ const Header = () => {
   return (
     <>
       <Link to="/">
-        <div className="bg-slate-300">
-          <h1>Header</h1>
+        <div className="bg-slate-200 h-10 flex items-center">
+          <img
+            src="https://i.ibb.co/WPGhwSs/Group-1000002277.png"
+            alt="logo"
+            className="w-30 h-8 ml-10"
+          />
         </div>
       </Link>
     </>
