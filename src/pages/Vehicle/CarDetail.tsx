@@ -79,7 +79,22 @@ const CarDetail = () => {
       <Typography variant="body1">
         Available: {carDetails.car_type.availability ? "Yes" : "No"}
       </Typography>
-
+      <Typography variant="body1">
+        Air Conditioner:{" "}
+        {carDetails.car_type.options.airconditioner ? "Yes" : "No"}
+      </Typography>
+      <Typography variant="body1">
+        Heated Seat: {carDetails.car_type.options.heatedseat ? "Yes" : "No"}
+      </Typography>
+      <Typography variant="body1">
+        Sunroof: {carDetails.car_type.options.sunroof ? "Yes" : "No"}
+      </Typography>
+      <Typography variant="body1">
+        Navigation: {carDetails.car_type.options.navigation ? "Yes" : "No"}
+      </Typography>
+      <Typography variant="body1">
+        Blackbox: {carDetails.car_type.options.blackbox ? "Yes" : "No"}
+      </Typography>
       <Divider style={{ margin: "20px 0" }} />
 
       <Typography variant="h5">Maintenance History</Typography>
