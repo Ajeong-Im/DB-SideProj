@@ -18,6 +18,7 @@ import EmployeeDetail from "./pages/Employee/EmployeeDetail";
 import CarModify from "./pages/Vehicle/CarModify";
 import AddGuest from "./pages/Guest/AddGuest";
 import GuestDetail from "./pages/Guest/GuestDetail";
+import GuestModify from "./pages/Guest/GuestModify";
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="employee/:employee_id" element={<EmployeeDetail />} />
           <Route path="/office/modify/:office_id" element={<OfficeModify />} />
           <Route path="/car/modify/:car_id/*" element={<CarModify />} />
+          <Route path="guest/modify/:guest_id" element={<GuestModify />} />
         </Routes>
       </BrowserRouter>
     </div>

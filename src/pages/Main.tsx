@@ -4,7 +4,7 @@ import BarChart from "./BarChart";
 const Main = () => {
   return (
     <div className="grid grid-cols-3 gap-4 justify-center content-center">
-      <div className="col-span-2 grid gap-4 content-center -ml-8">
+      <div className="col-span-2 grid gap-4 content-center -ml-20">
         <div>
           <div className="text-center text-4xl font-sans font-bold mt-8 mb-2 text text-slate-700">
             Rental Car Service

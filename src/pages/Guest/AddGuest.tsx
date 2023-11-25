@@ -242,10 +242,3 @@ const AddCar = () => {
 };
 
 export default AddCar;
-function setSnackbarMessage(arg0: string) {
-  throw new Error("Function not implemented.");
-}
-
-function setOpenSnackbar(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}

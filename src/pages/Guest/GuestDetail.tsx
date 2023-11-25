@@ -12,6 +12,11 @@ import {
 } from "@mui/material";
 import { domain } from "../../domain/domain";
 
+interface CarId {
+  id: number;
+  brand: string;
+}
+
 interface RentalId {
   id: number;
   start_date: string;
@@ -19,7 +24,9 @@ interface RentalId {
   total_amount: number;
   payment_method: string;
   status: string;
+  car: CarId; // 변경된 부분: car_id가 아니라 car로 변경
 }
+
 interface GuestDetailData {
   id: number;
   name: string;
@@ -27,11 +34,11 @@ interface GuestDetailData {
   email: string;
   driver_license: string;
   join_date: string;
-  rental_id: RentalId[];
+  rentals: RentalId[];
 }
 
 const GuestDetail = () => {
-  const { guest_id } = useParams<{ guest_id: string }>(); // URL 파라미터에서 customer_id를 추출
+  const { guest_id } = useParams<{ guest_id: string }>();
   const [guestDetails, setGuestDetails] = useState<GuestDetailData | null>(
     null
   );
@@ -42,7 +49,7 @@ const GuestDetail = () => {
       try {
         const response = await axios.get(
           `${domain}:8000/api/customers/detail/${guest_id}`
-        ); // API 호출
+        );
         setGuestDetails(response.data);
       } catch (error) {
         console.error("Error fetching car details:", error);
@@ -56,7 +63,7 @@ const GuestDetail = () => {
     return <div>Loading...</div>;
   }
 
-  const handleModifyCar = () => {
+  const handleModifyGuest = () => {
     navigate(`/guest/modify/${guest_id}`);
   };
 
@@ -83,33 +90,36 @@ const GuestDetail = () => {
 
       <Typography variant="h5">Rentals</Typography>
       <List>
-        {guestDetails.rental_id && guestDetails.rental_id.length > 0 ? (
-          guestDetails.rental_id.map((RentalId) => (
-            <ListItem key={RentalId.id}>
-              {RentalId.status === "in_progress" ? (
-                <ListItemText>
-                  {/* 여기에 출력하고자 하는 정보를 추가 */}
-                  <div>Start Date: {RentalId.start_date}</div>
-                  <div>End Date: {RentalId.end_date}</div>
-                  <div>Total Amount: {RentalId.total_amount}</div>
-                  <div>Payment Method: {RentalId.payment_method}</div>
-                  <div>Status: {RentalId.status}</div>
-                </ListItemText>
-              ) : null}
+        {guestDetails.rentals &&
+          guestDetails.rentals.map((rental) => (
+            <ListItem key={rental.id}>
+              <ListItemText>
+                <div>Rental ID: {rental.id}</div>
+                <div>Start Date: {rental.start_date}</div>
+                <div>End Date: {rental.end_date}</div>
+                <div>Total Amount: {rental.total_amount}</div>
+                <div>Payment Method: {rental.payment_method}</div>
+                <div>Status: {rental.status}</div>
+                {/* car 정보 출력 */}
+                {rental.car && (
+                  <div>
+                    <div>Car ID: {rental.car.id}</div>
+                    <div>Brand: {rental.car.brand}</div>
+                  </div>
+                )}
+              </ListItemText>
             </ListItem>
-          ))
-        ) : (
-          <Typography>이용 정보가 없습니다.</Typography>
-        )}
+          ))}
       </List>
+
       <div>
         <Button
           variant="contained"
           color="primary"
-          onClick={handleModifyCar}
+          onClick={handleModifyGuest}
           style={{ marginBottom: "20px" }}
         >
-          차량 수정
+          고객 정보 수정
         </Button>
       </div>
     </Paper>
