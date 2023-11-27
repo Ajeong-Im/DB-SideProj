@@ -18,13 +18,13 @@ interface CarId {
 }
 
 interface RentalId {
-  id: number;
+  rental_id: number;
   start_date: string;
   end_date: string;
   total_amount: number;
   payment_method: string;
   status: string;
-  car: CarId; // 변경된 부분: car_id가 아니라 car로 변경
+  cars: CarId[];
 }
 
 interface GuestDetailData {
@@ -51,6 +51,7 @@ const GuestDetail = () => {
           `${domain}:8000/api/customers/detail/${guest_id}`
         );
         setGuestDetails(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching car details:", error);
       }
@@ -92,21 +93,38 @@ const GuestDetail = () => {
       <List>
         {guestDetails.rentals &&
           guestDetails.rentals.map((rental) => (
-            <ListItem key={rental.id}>
+            <ListItem key={rental.rental_id}>
               <ListItemText>
-                <div>Rental ID: {rental.id}</div>
+                <div>Rental ID: {rental.rental_id}</div>
                 <div>Start Date: {rental.start_date}</div>
                 <div>End Date: {rental.end_date}</div>
                 <div>Total Amount: {rental.total_amount}</div>
                 <div>Payment Method: {rental.payment_method}</div>
                 <div>Status: {rental.status}</div>
-                {/* car 정보 출력 */}
-                {rental.car && (
-                  <div>
-                    <div>Car ID: {rental.car.id}</div>
-                    <div>Brand: {rental.car.brand}</div>
-                  </div>
-                )}
+              </ListItemText>
+            </ListItem>
+          ))}
+      </List>
+
+      <Typography variant="h5">Rental Car</Typography>
+      <List>
+        {guestDetails.rentals &&
+          guestDetails.rentals.map((rental) => (
+            <ListItem key={rental.rental_id}>
+              <ListItemText>
+                <div>
+                  {rental.cars && rental.cars.length > 0 && (
+                    <>
+                      <Typography variant="subtitle1">Cars:</Typography>
+                      {rental.cars.map((car) => (
+                        <div key={car.id}>
+                          <div>Car ID: {car.id}</div>
+                          <div>Brand: {car.brand}</div>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
               </ListItemText>
             </ListItem>
           ))}
