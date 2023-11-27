@@ -13,7 +13,7 @@ import {
 import { domain } from "../../domain/domain";
 
 interface CarId {
-  id: number;
+  car_id: number;
   brand: string;
 }
 
@@ -24,7 +24,7 @@ interface RentalId {
   total_amount: number;
   payment_method: string;
   status: string;
-  cars: CarId[];
+  car: CarId;
 }
 
 interface GuestDetailData {
@@ -112,19 +112,12 @@ const GuestDetail = () => {
           guestDetails.rentals.map((rental) => (
             <ListItem key={rental.rental_id}>
               <ListItemText>
-                <div>
-                  {rental.cars && rental.cars.length > 0 && (
-                    <>
-                      <Typography variant="subtitle1">Cars:</Typography>
-                      {rental.cars.map((car) => (
-                        <div key={car.id}>
-                          <div>Car ID: {car.id}</div>
-                          <div>Brand: {car.brand}</div>
-                        </div>
-                      ))}
-                    </>
-                  )}
-                </div>
+                {rental.car && (
+                  <>
+                    <div>Car ID: {rental.car.car_id}</div>
+                    <div>Brand: {rental.car.brand}</div>
+                  </>
+                )}
               </ListItemText>
             </ListItem>
           ))}

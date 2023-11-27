@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Paper,
   Table,
@@ -27,6 +27,7 @@ interface ApiResponse {
 const CarList = () => {
   const [carList, setCarList] = useState<ApiResponse[]>([]); // 상태의 타입을 ApiResponse[]로 설정
   const [filterAvailable, setFilterAvailable] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -48,6 +49,10 @@ const CarList = () => {
   const filteredCars = carList.filter(
     (car) => !filterAvailable || car.car_type.availability
   );
+
+  const handleRowClick = (CarId: number) => {
+    navigate(`/car/${CarId}`);
+  };
 
   return (
     <Paper>
@@ -73,7 +78,11 @@ const CarList = () => {
           </TableHead>
           <TableBody>
             {filteredCars.map((car) => (
-              <TableRow key={car.id}>
+              <TableRow
+                key={car.id}
+                onClick={() => handleRowClick(car.id)}
+                style={{ cursor: "pointer" }}
+              >
                 <TableCell component="th" scope="row">
                   {car.id}
                 </TableCell>
