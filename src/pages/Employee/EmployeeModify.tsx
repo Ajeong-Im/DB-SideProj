@@ -14,7 +14,6 @@ const EmployeeModify = () => {
     phone_number: "",
     email: "",
     wage: {
-      bank_account: "",
       amount: "",
     },
   });
@@ -27,14 +26,14 @@ const EmployeeModify = () => {
         );
         console.log(response.data);
         const { name, position, phone_number, email } = response.data;
-        const { bank_account, amount } = response.data.wage;
+        const { amount } = response.data.wage;
 
         setEmployeeData({
           name,
           position,
           phone_number,
           email,
-          wage: { bank_account, amount },
+          wage: { amount },
         });
       } catch (error) {
         console.error("Error fetching car data:", error);
@@ -109,14 +108,7 @@ const EmployeeModify = () => {
           fullWidth
           margin="normal"
         />
-        <TextField
-          label="계좌 번호"
-          name="bank_account"
-          value={employeeData.wage.bank_account}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
+
         <TextField
           label="월급"
           name="amount"

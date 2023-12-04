@@ -12,7 +12,7 @@ const AddEmployee = () => {
     position: "",
     phone_number: "",
     email: "",
-    bank_account: {
+    wage: {
       bank_account: "",
       amount: "",
     },
@@ -26,8 +26,8 @@ const AddEmployee = () => {
       const fieldName = name.split(".")[1];
       setEmployeeData((prevState) => ({
         ...prevState,
-        bank_account: {
-          ...prevState.bank_account,
+        wage: {
+          ...prevState.wage,
           [fieldName]: value,
         },
       }));
@@ -90,7 +90,7 @@ const AddEmployee = () => {
         <TextField
           label="Bank Account"
           name="bank_account.bank_account"
-          value={employeeData.bank_account.bank_account}
+          value={employeeData.wage.bank_account}
           onChange={handleChange}
           fullWidth
           margin="normal"
@@ -98,7 +98,7 @@ const AddEmployee = () => {
         <TextField
           label="Amount"
           name="bank_account.amount"
-          value={employeeData.bank_account.amount}
+          value={employeeData.wage.amount}
           onChange={handleChange}
           fullWidth
           margin="normal"

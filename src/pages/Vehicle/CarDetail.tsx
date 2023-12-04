@@ -42,6 +42,7 @@ interface CarDetailData {
 
 const CarDetail = () => {
   const { car_id } = useParams<{ car_id: string }>();
+  const { office_id } = useParams<{ office_id: string }>();
   const [carDetails, setCarDetails] = useState<CarDetailData | null>(null);
   const navigate = useNavigate();
 
@@ -69,6 +70,7 @@ const CarDetail = () => {
     } catch (error) {
       console.error("Error deleting car:", error);
     }
+    navigate(`/office/${office_id}`);
   };
 
   if (!carDetails) {
