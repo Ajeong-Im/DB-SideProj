@@ -42,7 +42,7 @@ const EmployeeDetail = () => {
   const handleDeleteEmployee = async () => {
     try {
       await axios.delete(`${domain}:8000/api/employees/delete/${employee_id}`);
-      navigate("/employees"); // 직원 삭제 후 직원 목록 페이지로 이동
+      navigate("/office");
     } catch (error) {
       console.error("Error deleting employee:", error);
     }

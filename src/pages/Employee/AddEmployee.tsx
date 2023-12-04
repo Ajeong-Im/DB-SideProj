@@ -45,7 +45,7 @@ const AddEmployee = () => {
         employeeData
       );
       setOpenSnackbar(true);
-      setTimeout(() => navigate(`/office/${office_id}`), 2000);
+      setTimeout(() => navigate(`/office/${office_id}`), 500);
     } catch (error) {
       console.error("Error posting employee data:", error);
     }
