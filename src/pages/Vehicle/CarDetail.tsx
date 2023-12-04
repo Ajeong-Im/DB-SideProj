@@ -78,7 +78,7 @@ const CarDetail = () => {
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
       <div className="grid grid-cols-2">
-        <div className="col-span-1 ">
+        <div className="col-span-1">
           <img
             src="https://i.ibb.co/C83wCc5/1.png"
             alt="office"

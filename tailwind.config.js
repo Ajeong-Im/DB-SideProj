@@ -21,6 +21,11 @@ module.exports = {
           WebkitFilter: "grayscale(80%)",
           filter: "grayscale(80%)",
         },
+        ".myhover": {
+          opacity: "1",
+          WebkitAnimation: "flash 1.5s",
+          animation: "flash 1.5s",
+        },
       };
       addUtilities(newUtilities, ["responsive", "hover"]);
     },
