@@ -39,6 +39,7 @@ const CarModify = () => {
     const fetchCarData = async () => {
       try {
         const response = await axios.get(`${domain}:8000/api/cars/${car_id}`);
+        console.log(response.data);
         const {
           brand,
           size,

@@ -67,6 +67,10 @@ const OfficeDetail = () => {
     navigate(`/car/${carId}`);
   };
 
+  const handleAddCar = () => {
+    navigate(`/car/add/${office_id}`);
+  };
+
   const handleModifyOffice = () => {
     navigate(`/office/modify/${office_id}`);
   };
@@ -122,6 +126,17 @@ const OfficeDetail = () => {
       </List>
 
       <Divider style={{ margin: "20px 0" }} />
+
+      <div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddCar}
+          style={{ marginBottom: "20px" }}
+        >
+          차량 등록
+        </Button>
+      </div>
 
       <Typography variant="h5">차량 목록</Typography>
       <List>

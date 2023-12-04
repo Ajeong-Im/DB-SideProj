@@ -1,8 +1,24 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { domain } from '../../domain/domain';
-import { FormControl, InputLabel, Select, MenuItem, TextField, Button, Switch, FormGroup, FormControlLabel, Paper, Typography, SelectChangeEvent, Checkbox, Snackbar, Alert } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { domain } from "../../domain/domain";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  TextField,
+  Button,
+  Switch,
+  FormGroup,
+  FormControlLabel,
+  Paper,
+  Typography,
+  SelectChangeEvent,
+  Checkbox,
+  Snackbar,
+  Alert,
+} from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface CarOptions {
   airconditioner: boolean;
@@ -14,7 +30,7 @@ interface CarOptions {
 
 interface CarType {
   brand: string;
-  size: 'small' | 'medium' | 'large';
+  size: "small" | "medium" | "large";
 }
 
 interface CarData {
@@ -28,17 +44,18 @@ interface CarData {
 
 const AddCar = () => {
   const navigate = useNavigate(); // React Router v6를 사용하는 경우
+  const { office_id } = useParams();
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const [carData, setCarData] = useState<CarData>({
     car_type: {
-      brand: '',
-      size: 'small',
+      brand: "",
+      size: "small",
     },
-    branch: '',
-    mileage: '',
+    branch: "",
+    mileage: "",
     availability: false,
-    rental_price: '',
+    rental_price: "",
     options: {
       airconditioner: false,
       heatedseat: false,
@@ -49,25 +66,27 @@ const AddCar = () => {
   });
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>
+    event:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent<string>
   ) => {
     const target = event.target;
     const name = target.name;
     let value: string | boolean;
-  
+
     // 체크박스인 경우
-    if (target instanceof HTMLInputElement && target.type === 'checkbox') {
+    if (target instanceof HTMLInputElement && target.type === "checkbox") {
       value = target.checked;
     } else {
       value = target.value;
     }
-  
+
     setCarData((prevState) => {
-      const keys = name.split('.');
+      const keys = name.split(".");
       if (keys.length > 1) {
         const [firstKey, secondKey] = keys as [keyof CarData, keyof CarOptions];
         const nestedObject = prevState[firstKey];
-        if (nestedObject && typeof nestedObject === 'object') {
+        if (nestedObject && typeof nestedObject === "object") {
           (nestedObject as any)[secondKey] = value;
           return {
             ...prevState,
@@ -87,24 +106,27 @@ const AddCar = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${domain}:8000/api/cars/create`, carData);
+      const response = await axios.post(
+        `${domain}:8000/api/cars/create/${office_id}`,
+        carData
+      );
       console.log(response.data);
       // 메시지 설정 및 스낵바 오픈
-      setSnackbarMessage('차량 등록이 완료되었습니다!');
+      setSnackbarMessage("차량 등록이 완료되었습니다!");
       setOpenSnackbar(true);
       // 3초 후 메인 페이지로 이동
       setTimeout(() => {
-        navigate('/'); // 메인 페이지의 경로를 지정합니다.
+        navigate("/"); // 메인 페이지의 경로를 지정합니다.
       }, 3000);
     } catch (error) {
-      console.error('Error posting car data:', error);
-      setSnackbarMessage('차량 등록에 실패했습니다.');
+      console.error("Error posting car data:", error);
+      setSnackbarMessage("차량 등록에 실패했습니다.");
       setOpenSnackbar(true);
     }
   };
 
   return (
-    <Paper style={{ padding: '20px', margin: '20px' }}>
+    <Paper style={{ padding: "20px", margin: "20px" }}>
       <Typography variant="h4">Car Registration</Typography>
       <form onSubmit={handleSubmit}>
         {/* Brand TextField */}
@@ -133,16 +155,6 @@ const AddCar = () => {
           </Select>
         </FormControl>
 
-        {/* Branch TextField */}
-        <TextField
-          label="Branch"
-          name="branch"
-          value={carData.branch}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-
         {/* Mileage TextField */}
         <TextField
           label="Mileage"
@@ -167,19 +179,21 @@ const AddCar = () => {
 
         {/* Car Options Checkboxes */}
         <FormGroup>
-          {(Object.keys(carData.options) as (keyof CarOptions)[]).map((option) => (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={carData.options[option]}
-                  onChange={handleChange}
-                  name={`options.${option}`}
-                />
-              }
-              label={option.charAt(0).toUpperCase() + option.slice(1)}
-              key={option}
-            />
-          ))}
+          {(Object.keys(carData.options) as (keyof CarOptions)[]).map(
+            (option) => (
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={carData.options[option]}
+                    onChange={handleChange}
+                    name={`options.${option}`}
+                  />
+                }
+                label={option.charAt(0).toUpperCase() + option.slice(1)}
+                key={option}
+              />
+            )
+          )}
         </FormGroup>
 
         {/* Availability Switch */}
@@ -201,8 +215,16 @@ const AddCar = () => {
           Register Car
         </Button>
       </form>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={() => setOpenSnackbar(false)}>
-        <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           {snackbarMessage}
         </Alert>
       </Snackbar>
@@ -211,11 +233,3 @@ const AddCar = () => {
 };
 
 export default AddCar;
-function setSnackbarMessage(arg0: string) {
-  throw new Error('Function not implemented.');
-}
-
-function setOpenSnackbar(arg0: boolean) {
-  throw new Error('Function not implemented.');
-}
-
