@@ -58,6 +58,10 @@ const EmployeeDetail = () => {
 
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
+      <img
+        src="https://i.ibb.co/xGMVkyk/image.png"
+        style={{ width: "300px", height: "300px", margin: "20px 0" }}
+      />
       <Typography variant="h4">{employeeDetails.name}</Typography>
       <Typography variant="body1">
         Position: {employeeDetails.position}
