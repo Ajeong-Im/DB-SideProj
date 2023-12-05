@@ -1,5 +1,3 @@
-// CarMaint.tsx
-
 import React, { useState } from "react";
 import { Modal, Button, TextField } from "@mui/material";
 import axios from "axios";
@@ -9,9 +7,15 @@ interface CarMaintProps {
   carId: number;
   isOpen: boolean;
   onClose: () => void;
+  onAddMaintenance: () => void; // 새로운 정비 이력이 추가되었을 때 호출할 콜백 함수
 }
 
-const CarMaint: React.FC<CarMaintProps> = ({ carId, isOpen, onClose }) => {
+const CarMaint: React.FC<CarMaintProps> = ({
+  carId,
+  isOpen,
+  onClose,
+  onAddMaintenance,
+}) => {
   const [maintenanceDate, setMaintenanceDate] = useState<string>("");
   const [reason, setReason] = useState<string>("");
   const [cost, setCost] = useState<number | string>("");
@@ -29,6 +33,7 @@ const CarMaint: React.FC<CarMaintProps> = ({ carId, isOpen, onClose }) => {
 
       console.log("Maintenance record added successfully:", response.data);
       onClose(); // 모달 닫기
+      onAddMaintenance(); // 새로운 정비 이력이 추가되었음을 부모 컴포넌트에 알리기
     } catch (error) {
       console.error("Error adding maintenance record:", error);
     }

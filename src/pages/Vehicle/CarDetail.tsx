@@ -83,6 +83,16 @@ const CarDetail = () => {
     setIsMaintModalOpen(false);
   };
 
+  const handleAddMaintenance = async () => {
+    // 정비 이력이 추가된 후에 정비 이력 목록을 다시 불러와서 상태를 업데이트
+    try {
+      const response = await axios.get(`${domain}:8000/api/cars/${car_id}`);
+      setCarDetails(response.data);
+    } catch (error) {
+      console.error("Error fetching car details:", error);
+    }
+  };
+
   const handleDeleteMaintenance = async (maintenanceId: number) => {
     try {
       await axios.delete(
@@ -157,15 +167,15 @@ const CarDetail = () => {
           <List>
             {carDetails.maintenances.map((maintenance) => (
               <ListItem key={maintenance.id}>
-                Date: {maintenance.maintenance_date}, Reason:{" "}
-                {maintenance.reason}, Cost: ${maintenance.cost}
                 <button
                   type="button"
                   onClick={() => handleDeleteMaintenance(maintenance.id)}
-                  className="text-red-500 ml-3 px-1 text-xs font-bold border border-gray-400"
+                  className="text-red-500 mr-3 px-1 text-xs font-bold border border-gray-400"
                 >
-                  삭제
+                  X
                 </button>
+                Date: {maintenance.maintenance_date}, Reason:{" "}
+                {maintenance.reason}, Cost: ${maintenance.cost}
               </ListItem>
             ))}
           </List>
@@ -193,6 +203,7 @@ const CarDetail = () => {
         carId={carDetails.id}
         isOpen={isMaintModalOpen}
         onClose={handleCloseMaintModal}
+        onAddMaintenance={handleAddMaintenance} // 수정된 부분
       />
     </Paper>
   );
