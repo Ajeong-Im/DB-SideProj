@@ -80,23 +80,23 @@ const GuestDetail = () => {
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
       <div className="grid grid-cols-3">
-        <div className="col-span-1">
+        <div className="col-span-1 ml-20">
           <div className="text-4xl font-semibold">{guestDetails.name}</div>
           <img
             src="https://i.ibb.co/zWggJNh/image.png"
             alt="office"
             style={{ width: "200px", height: "200px", margin: "20px 0" }}
           />
-          <Typography variant="body1">ID: {guestDetails.id}</Typography>
+          <Typography variant="body1">고객 ID: {guestDetails.id}</Typography>
           <Typography variant="body1">
-            Phone Number: {guestDetails.phone_number}
+            전화번호: {guestDetails.phone_number}
           </Typography>
           <Typography variant="body1">Email: {guestDetails.email}</Typography>
           <Typography variant="body1">
-            Driver License: {guestDetails.driver_license}
+            운전면허번호: {guestDetails.driver_license}
           </Typography>
           <Typography variant="body1">
-            Join Date: {guestDetails.join_date}
+            가입 날짜: {guestDetails.join_date}
           </Typography>
           <div className="mt-4">
             <Button
@@ -129,14 +129,35 @@ const GuestDetail = () => {
                     {rental.car && (
                       <>
                         <div className="text-xl">{rental.car.brand}</div>
-                        <div>Car ID: {rental.car.car_id}</div>
+                        <div>차량 ID: {rental.car.car_id}</div>
                       </>
                     )}
-                    <div>Start Date: {rental.start_date}</div>
-                    <div>End Date: {rental.end_date}</div>
-                    <div>Total Amount: {rental.total_amount}</div>
-                    <div>Payment Method: {rental.payment_method}</div>
-                    <div>Status: {rental.status}</div>
+                    <div>대여 시작 일자: {rental.start_date.slice(0, 10)}</div>
+                    <div>대여 종료 일자: {rental.end_date.slice(0, 10)}</div>
+                    <div>가격: {rental.total_amount}</div>
+                    <div>지불 방식: {rental.payment_method}</div>
+                    <div>
+                      상태:{" "}
+                      <span
+                        className={`${
+                          rental.status === "in_progress"
+                            ? "text-red-500 font-bold"
+                            : rental.status === "reserved"
+                            ? "text-blue-500 font-bold"
+                            : rental.status === "returned"
+                            ? "text-green-500 font-bold"
+                            : ""
+                        }`}
+                      >
+                        {rental.status === "in_progress"
+                          ? "대여 중"
+                          : rental.status === "reserved"
+                          ? "예약"
+                          : rental.status === "returned"
+                          ? "반납 완료"
+                          : rental.status}
+                      </span>
+                    </div>
                   </ListItemText>
                 </ListItem>
               ))}

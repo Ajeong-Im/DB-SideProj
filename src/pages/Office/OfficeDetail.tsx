@@ -96,7 +96,7 @@ const OfficeDetail = () => {
 
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-3">
         <div className="col-span-1">
           <img
             src="https://i.ibb.co/RPQz6xN/image.png"
@@ -118,7 +118,6 @@ const OfficeDetail = () => {
             >
               지점 수정
             </Button>
-
             <Button
               variant="contained"
               color="error"
