@@ -75,13 +75,29 @@ const OfficeDetail = () => {
     navigate(`/office/modify/${office_id}`);
   };
 
+  const handleDeleteBranch = async () => {
+    try {
+      const response = await axios.delete(
+        `${domain}:8000/api/employees/branch/delete/${office_id}`
+      );
+      console.log(response.data);
+      navigate("/office");
+    } catch (error) {
+      console.error("Error deleting branch:", error);
+    }
+  };
+
   if (!officeDetails) {
     return <div>Loading...</div>;
   }
+
+  const isDeletable =
+    officeDetails.employees.length === 0 && officeDetails.cars.length === 0;
+
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
       <div className="grid grid-cols-2">
-        <div className="col-span-1 content-center items-center">
+        <div className="col-span-1">
           <img
             src="https://i.ibb.co/RPQz6xN/image.png"
             alt="office"
@@ -103,6 +119,14 @@ const OfficeDetail = () => {
               지점 수정
             </Button>
           </div>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={handleDeleteBranch}
+            disabled={!isDeletable}
+          >
+            지점 삭제
+          </Button>
         </div>
         <div>
           <Typography variant="h5">직원 목록</Typography>

@@ -70,7 +70,7 @@ const CarDetail = () => {
     } catch (error) {
       console.error("Error deleting car:", error);
     }
-    navigate(`/office/${office_id}`);
+    navigate(`/office`);
   };
 
   if (!carDetails) {
