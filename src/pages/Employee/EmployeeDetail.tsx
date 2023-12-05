@@ -42,7 +42,7 @@ const EmployeeDetail = () => {
   const handleDeleteEmployee = async () => {
     try {
       await axios.delete(`${domain}:8000/api/employees/delete/${employee_id}`);
-      navigate("/office");
+      navigate(-1);
     } catch (error) {
       console.error("Error deleting employee:", error);
     }

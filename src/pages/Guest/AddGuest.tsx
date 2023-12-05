@@ -116,7 +116,7 @@ const AddCar = () => {
       // 3초 후 메인 페이지로 이동
       setTimeout(() => {
         navigate("/"); // 메인 페이지의 경로를 지정합니다.
-      }, 3000);
+      }, 500);
     } catch (error) {
       console.error("Error posting car data:", error);
       setSnackbarMessage("차량 등록에 실패했습니다.");

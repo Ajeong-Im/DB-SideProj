@@ -66,11 +66,10 @@ const CarDetail = () => {
   const handleDeleteCar = async () => {
     try {
       await axios.delete(`${domain}:8000/api/cars/delete/${car_id}`);
-      navigate("/"); // 차량 삭제 후 홈페이지 또는 다른 페이지로 이동
+      navigate(-1); // 차량 삭제 후 홈페이지 또는 다른 페이지로 이동
     } catch (error) {
       console.error("Error deleting car:", error);
     }
-    navigate(`/office`);
   };
 
   if (!carDetails) {
