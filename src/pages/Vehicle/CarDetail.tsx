@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { domain } from "../../domain/domain";
+import CarMaint from "./CarMaint";
 
 // 차량 유지보수 이력 인터페이스
 interface Maintenance {
@@ -42,7 +43,9 @@ interface CarDetailData {
 
 const CarDetail = () => {
   const { car_id } = useParams<{ car_id: string }>();
+  const { office_id } = useParams<{ office_id: string }>();
   const [carDetails, setCarDetails] = useState<CarDetailData | null>(null);
+  const [isMaintModalOpen, setIsMaintModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,9 +68,31 @@ const CarDetail = () => {
   const handleDeleteCar = async () => {
     try {
       await axios.delete(`${domain}:8000/api/cars/delete/${car_id}`);
-      navigate(-1); // 차량 삭제 후 홈페이지 또는 다른 페이지로 이동
+      navigate("/"); // 차량 삭제 후 홈페이지 또는 다른 페이지로 이동
     } catch (error) {
       console.error("Error deleting car:", error);
+    }
+    navigate(`/office/${office_id}`);
+  };
+
+  const handleOpenMaintModal = () => {
+    setIsMaintModalOpen(true);
+  };
+
+  const handleCloseMaintModal = () => {
+    setIsMaintModalOpen(false);
+  };
+
+  const handleDeleteMaintenance = async (maintenanceId: number) => {
+    try {
+      await axios.delete(
+        `${domain}:8000/api/cars/maintenance/delete/${maintenanceId}`
+      );
+      // 정비 이력 삭제 후 화면 갱신을 위해 차량 상세 정보를 다시 불러옴
+      const response = await axios.get(`${domain}:8000/api/cars/${car_id}`);
+      setCarDetails(response.data);
+    } catch (error) {
+      console.error("Error deleting maintenance record:", error);
     }
   };
 
@@ -78,7 +103,7 @@ const CarDetail = () => {
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
       <div className="grid grid-cols-2">
-        <div className="col-span-1 ml-16">
+        <div className="col-span-1">
           <img
             src="https://i.ibb.co/C83wCc5/1.png"
             alt="office"
@@ -118,13 +143,29 @@ const CarDetail = () => {
             Blackbox: {carDetails.car_type.options.blackbox ? "O" : "X"}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
+          <div className="flex items-center">
+            <h1 className="text-2xl">수리 이력</h1>
+            <button
+              type="button"
+              onClick={handleOpenMaintModal}
+              className=" text-black ml-3 px-1 text-xs font-bold border border-gray-400"
+            >
+              +
+            </button>
+          </div>
 
-          <Typography variant="h5">수리 이력</Typography>
           <List>
             {carDetails.maintenances.map((maintenance) => (
               <ListItem key={maintenance.id}>
                 Date: {maintenance.maintenance_date}, Reason:{" "}
                 {maintenance.reason}, Cost: ${maintenance.cost}
+                <button
+                  type="button"
+                  onClick={() => handleDeleteMaintenance(maintenance.id)}
+                  className="text-red-500 ml-3 px-1 text-xs font-bold border border-gray-400"
+                >
+                  삭제
+                </button>
               </ListItem>
             ))}
           </List>
@@ -148,6 +189,11 @@ const CarDetail = () => {
           </div>
         </div>
       </div>
+      <CarMaint
+        carId={carDetails.id}
+        isOpen={isMaintModalOpen}
+        onClose={handleCloseMaintModal}
+      />
     </Paper>
   );
 };
