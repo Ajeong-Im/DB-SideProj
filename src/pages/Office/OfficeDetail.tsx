@@ -97,7 +97,7 @@ const OfficeDetail = () => {
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
       <div className="grid grid-cols-3">
-        <div className="col-span-1">
+        <div className="col-span-1 ml-20">
           <img
             src="https://i.ibb.co/RPQz6xN/image.png"
             alt="office"
