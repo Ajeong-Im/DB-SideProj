@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ChangeEvent } from "react";
+import { SelectChangeEvent } from "@mui/material/Select";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
@@ -10,6 +11,8 @@ import {
   FormGroup,
   Switch,
   Checkbox,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { domain } from "../../domain/domain";
 
@@ -66,8 +69,12 @@ const CarModify = () => {
     fetchCarData();
   }, [car_id]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, type, checked, value } = e.target;
+  const handleChange = (
+    e:
+      | ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>
+      | SelectChangeEvent<string>
+  ) => {
+    const { name, type, checked, value } = e.target as HTMLInputElement;
 
     setCarData((prevData) => {
       if (name === "availability") {
@@ -99,7 +106,6 @@ const CarModify = () => {
           mileage: value,
         };
       } else if (name in prevData.options) {
-        // options 중 하나의 체크박스가 변경된 경우
         return {
           ...prevData,
           options: {
@@ -139,14 +145,17 @@ const CarModify = () => {
           fullWidth
           margin="normal"
         />
-        <TextField
+        <Select
           label="차량 사이즈"
           name="size"
           value={carData.car_type.size}
           onChange={handleChange}
           fullWidth
-          margin="normal"
-        />
+        >
+          <MenuItem value="small">Small</MenuItem>
+          <MenuItem value="medium">Medium</MenuItem>
+          <MenuItem value="large">Large</MenuItem>
+        </Select>
         <TextField
           label="대여 가격"
           name="rental_price"

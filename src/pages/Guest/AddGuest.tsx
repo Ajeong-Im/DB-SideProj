@@ -20,208 +20,93 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-interface CarOptions {
-  airconditioner: boolean;
-  heatedseat: boolean;
-  sunroof: boolean;
-  navigation: boolean;
-  blackbox: boolean;
+interface GuestData {
+  name: string;
+  phone_number: string;
+  email: string;
+  driver_license_number: string;
+  join_date: string;
 }
 
-interface CarType {
-  brand: string;
-  size: "small" | "medium" | "large";
-}
-
-interface CarData {
-  car_type: CarType;
-  branch: string;
-  mileage: string;
-  availability: boolean;
-  rental_price: string;
-  options: CarOptions;
-}
-
-const AddCar = () => {
+const AddGuest = () => {
   const navigate = useNavigate(); // React Router v6를 사용하는 경우
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [carData, setCarData] = useState<CarData>({
-    car_type: {
-      brand: "",
-      size: "small",
-    },
-    branch: "",
-    mileage: "",
-    availability: false,
-    rental_price: "",
-    options: {
-      airconditioner: false,
-      heatedseat: false,
-      sunroof: false,
-      navigation: false,
-      blackbox: false,
-    },
+  const [guestData, setGuestData] = useState<GuestData>({
+    name: "",
+    phone_number: "",
+    email: "",
+    driver_license_number: "",
+    join_date: "",
   });
 
-  const handleChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent<string>
-  ) => {
-    const target = event.target;
-    const name = target.name;
-    let value: string | boolean;
-
-    // 체크박스인 경우
-    if (target instanceof HTMLInputElement && target.type === "checkbox") {
-      value = target.checked;
-    } else {
-      value = target.value;
-    }
-
-    setCarData((prevState) => {
-      const keys = name.split(".");
-      if (keys.length > 1) {
-        const [firstKey, secondKey] = keys as [keyof CarData, keyof CarOptions];
-        const nestedObject = prevState[firstKey];
-        if (nestedObject && typeof nestedObject === "object") {
-          (nestedObject as any)[secondKey] = value;
-          return {
-            ...prevState,
-            [firstKey]: { ...nestedObject },
-          };
-        }
-      } else {
-        return {
-          ...prevState,
-          [name]: value,
-        };
-      }
-      return prevState;
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setGuestData({ ...guestData, [name]: value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${domain}:8000/api/cars/create`,
-        carData
-      );
-      console.log(response.data);
-      // 메시지 설정 및 스낵바 오픈
-      setSnackbarMessage("차량 등록이 완료되었습니다!");
+      await axios.post(`${domain}:8000/api/customers/add`, guestData);
       setOpenSnackbar(true);
-      // 3초 후 메인 페이지로 이동
-      setTimeout(() => {
-        navigate("/"); // 메인 페이지의 경로를 지정합니다.
-      }, 500);
+      setTimeout(() => navigate(-1), 500);
     } catch (error) {
-      console.error("Error posting car data:", error);
-      setSnackbarMessage("차량 등록에 실패했습니다.");
-      setOpenSnackbar(true);
+      console.error("Error posting employee data:", error);
     }
   };
 
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
-      <Typography variant="h4">Car Registration</Typography>
+      <Typography variant="h4">Guest Registration</Typography>
       <form onSubmit={handleSubmit}>
-        {/* Brand TextField */}
         <TextField
-          label="Brand"
-          name="car_type.brand"
-          value={carData.car_type.brand}
+          label="name"
+          name="name"
+          value={guestData.name}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label="Phone Number"
+          name="phone_number"
+          value={guestData.phone_number}
           onChange={handleChange}
           fullWidth
           margin="normal"
         />
 
-        {/* Size Selection */}
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="car-size-label">Size</InputLabel>
-          <Select
-            labelId="car-size-label"
-            name="car_type.size"
-            value={carData.car_type.size}
-            label="Size"
-            onChange={handleChange}
-          >
-            <MenuItem value="small">Small</MenuItem>
-            <MenuItem value="medium">Medium</MenuItem>
-            <MenuItem value="large">Large</MenuItem>
-          </Select>
-        </FormControl>
-
-        {/* Branch TextField */}
         <TextField
-          label="Branch"
-          name="branch"
-          value={carData.branch}
+          label="Email"
+          name="email"
+          value={guestData.email}
           onChange={handleChange}
           fullWidth
           margin="normal"
         />
 
-        {/* Mileage TextField */}
         <TextField
-          label="Mileage"
-          name="mileage"
-          value={carData.mileage}
+          label="Driver License Number"
+          name="driver_license_number"
+          value={guestData.driver_license_number}
           onChange={handleChange}
           fullWidth
           margin="normal"
-          type="number"
         />
 
-        {/* Rental Price TextField */}
         <TextField
-          label="Rental Price"
-          name="rental_price"
-          value={carData.rental_price}
+          label="Join Date"
+          name="join_date"
+          value={guestData.join_date}
           onChange={handleChange}
           fullWidth
           margin="normal"
-          type="number"
         />
-
-        {/* Car Options Checkboxes */}
-        <FormGroup>
-          {(Object.keys(carData.options) as (keyof CarOptions)[]).map(
-            (option) => (
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={carData.options[option]}
-                    onChange={handleChange}
-                    name={`options.${option}`}
-                  />
-                }
-                label={option.charAt(0).toUpperCase() + option.slice(1)}
-                key={option}
-              />
-            )
-          )}
-        </FormGroup>
-
-        {/* Availability Switch */}
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={carData.availability}
-                onChange={handleChange}
-                name="availability"
-              />
-            }
-            label="Availability"
-          />
-        </FormGroup>
 
         {/* Submit Button */}
         <Button type="submit" variant="contained" color="primary">
-          Register Car
+          고객 등록
         </Button>
       </form>
       <Snackbar
@@ -241,4 +126,4 @@ const AddCar = () => {
   );
 };
 
-export default AddCar;
+export default AddGuest;

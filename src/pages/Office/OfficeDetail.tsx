@@ -114,19 +114,20 @@ const OfficeDetail = () => {
               variant="contained"
               color="primary"
               onClick={handleModifyOffice}
-              style={{ marginBottom: "20px" }}
+              style={{ marginRight: "10px" }}
             >
               지점 수정
             </Button>
+
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleDeleteBranch}
+              disabled={!isDeletable}
+            >
+              지점 삭제
+            </Button>
           </div>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={handleDeleteBranch}
-            disabled={!isDeletable}
-          >
-            지점 삭제
-          </Button>
         </div>
         <div>
           <Typography variant="h5">직원 목록</Typography>
