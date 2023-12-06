@@ -123,34 +123,33 @@ const CarDetail = () => {
         <div className="col-span-1 ml-10">
           <h1 className="text-3xl mb-3">{carDetails.car_type.brand}</h1>
           <Typography variant="body1">
-            Size: {carDetails.car_type.size}
+            크기: {carDetails.car_type.size}
           </Typography>
           <Typography variant="body1">
-            Mileage: {carDetails.car_type.mileage} km
+            주행 거리: {carDetails.car_type.mileage} km
           </Typography>
           <Typography variant="body1">
-            Rental Price: ${carDetails.car_type.rental_price}
+            대여 가격: ${carDetails.car_type.rental_price}
           </Typography>
           <Typography variant="body1">
-            Available: {carDetails.car_type.availability ? "O" : "X"}
+            사용 가능 여부: {carDetails.car_type.availability ? "O" : "X"}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
           <h1 className="text-2xl mb-3">옵션</h1>
           <Typography variant="body1">
-            Air Conditioner:{" "}
-            {carDetails.car_type.options.airconditioner ? "O" : "X"}
+            에어컨: {carDetails.car_type.options.airconditioner ? "O" : "X"}
           </Typography>
           <Typography variant="body1">
-            Heated Seat: {carDetails.car_type.options.heatedseat ? "O" : "X"}
+            온열 시트: {carDetails.car_type.options.heatedseat ? "O" : "X"}
           </Typography>
           <Typography variant="body1">
-            Sunroof: {carDetails.car_type.options.sunroof ? "O" : "X"}
+            썬루프: {carDetails.car_type.options.sunroof ? "O" : "X"}
           </Typography>
           <Typography variant="body1">
-            Navigation: {carDetails.car_type.options.navigation ? "O" : "X"}
+            네비게이션: {carDetails.car_type.options.navigation ? "O" : "X"}
           </Typography>
           <Typography variant="body1">
-            Blackbox: {carDetails.car_type.options.blackbox ? "O" : "X"}
+            블랙박스: {carDetails.car_type.options.blackbox ? "O" : "X"}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
           <div className="flex items-center">
@@ -174,8 +173,8 @@ const CarDetail = () => {
                 >
                   X
                 </button>
-                Date: {maintenance.maintenance_date}, Reason:{" "}
-                {maintenance.reason}, Cost: ${maintenance.cost}
+                일자: {maintenance.maintenance_date}, 사유: {maintenance.reason}
+                , 금액: ${maintenance.cost}
               </ListItem>
             ))}
           </List>

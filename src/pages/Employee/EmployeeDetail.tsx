@@ -63,18 +63,16 @@ const EmployeeDetail = () => {
         style={{ width: "300px", height: "300px", margin: "20px 0" }}
       />
       <Typography variant="h4">{employeeDetails.name}</Typography>
+      <Typography variant="body1">직급: {employeeDetails.position}</Typography>
       <Typography variant="body1">
-        Position: {employeeDetails.position}
-      </Typography>
-      <Typography variant="body1">
-        Phone Number: {employeeDetails.phone_number}
+        전화번호: {employeeDetails.phone_number}
       </Typography>
       <Typography variant="body1">Email: {employeeDetails.email}</Typography>
       <Typography variant="body1">
-        Bank Account: {employeeDetails.wage.bank_account}
+        계좌: {employeeDetails.wage.bank_account}
       </Typography>
       <Typography variant="body1">
-        Salary: ${employeeDetails.wage.amount}
+        월급: ${employeeDetails.wage.amount}
       </Typography>
 
       {/* 추가적인 정보가 있다면 여기에 계속해서 출력할 수 있습니다. */}
