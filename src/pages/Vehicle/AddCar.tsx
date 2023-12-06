@@ -103,6 +103,23 @@ const AddCar = () => {
     });
   };
 
+  const getOptionLabel = (option: string): string => {
+    switch (option) {
+      case "airconditioner":
+        return "에어컨";
+      case "heatedseat":
+        return "온열 시트";
+      case "sunroof":
+        return "썬루프";
+      case "navigation":
+        return "네비게이션";
+      case "blackbox":
+        return "블랙박스";
+      default:
+        return option;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -127,11 +144,11 @@ const AddCar = () => {
 
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
-      <Typography variant="h4">Car Registration</Typography>
+      <Typography variant="h4">차량 등록</Typography>
       <form onSubmit={handleSubmit}>
         {/* Brand TextField */}
         <TextField
-          label="Brand"
+          label="브랜드"
           name="car_type.brand"
           value={carData.car_type.brand}
           onChange={handleChange}
@@ -141,7 +158,7 @@ const AddCar = () => {
 
         {/* Size Selection */}
         <FormControl fullWidth margin="normal">
-          <InputLabel id="car-size-label">Size</InputLabel>
+          <InputLabel id="car-size-label">크기</InputLabel>
           <Select
             labelId="car-size-label"
             name="car_type.size"
@@ -157,7 +174,7 @@ const AddCar = () => {
 
         {/* Mileage TextField */}
         <TextField
-          label="Mileage"
+          label="주행 거리"
           name="mileage"
           value={carData.mileage}
           onChange={handleChange}
@@ -168,7 +185,7 @@ const AddCar = () => {
 
         {/* Rental Price TextField */}
         <TextField
-          label="Rental Price"
+          label="대여 가격"
           name="rental_price"
           value={carData.rental_price}
           onChange={handleChange}
@@ -189,7 +206,7 @@ const AddCar = () => {
                     name={`options.${option}`}
                   />
                 }
-                label={option.charAt(0).toUpperCase() + option.slice(1)}
+                label={getOptionLabel(option)}
                 key={option}
               />
             )
@@ -206,13 +223,13 @@ const AddCar = () => {
                 name="availability"
               />
             }
-            label="Availability"
+            label="사용 가능 여부"
           />
         </FormGroup>
 
         {/* Submit Button */}
         <Button type="submit" variant="contained" color="primary">
-          Register Car
+          등록하기
         </Button>
       </form>
       <Snackbar
