@@ -61,7 +61,7 @@ const AddGuest = () => {
       <Typography variant="h4">Guest Registration</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="name"
+          label="이름"
           name="name"
           value={guestData.name}
           onChange={handleChange}
@@ -69,7 +69,7 @@ const AddGuest = () => {
           margin="normal"
         />
         <TextField
-          label="Phone Number"
+          label="전화번호"
           name="phone_number"
           value={guestData.phone_number}
           onChange={handleChange}
@@ -87,18 +87,9 @@ const AddGuest = () => {
         />
 
         <TextField
-          label="Driver License Number"
+          label="운전면허번호"
           name="driver_license_number"
           value={guestData.driver_license_number}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-
-        <TextField
-          label="Join Date"
-          name="join_date"
-          value={guestData.join_date}
           onChange={handleChange}
           fullWidth
           margin="normal"
