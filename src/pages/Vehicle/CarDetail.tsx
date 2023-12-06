@@ -158,7 +158,7 @@ const CarDetail = () => {
             <button
               type="button"
               onClick={handleOpenMaintModal}
-              className=" text-black ml-3 px-1 text-xs font-bold border border-gray-400"
+              className="bg-sky-500 text-white ml-3 px-1 text-xs font-bold border border-gray-400"
             >
               +
             </button>
@@ -170,7 +170,7 @@ const CarDetail = () => {
                 <button
                   type="button"
                   onClick={() => handleDeleteMaintenance(maintenance.id)}
-                  className="text-red-500 mr-3 px-1 text-xs font-bold border border-gray-400"
+                  className="bg-red-500 text-white mr-3 px-1 text-xs font-bold border border-gray-400"
                 >
                   X
                 </button>

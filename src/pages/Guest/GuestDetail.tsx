@@ -6,11 +6,13 @@ import {
   Typography,
   List,
   ListItem,
-  Divider,
   Button,
   ListItemText,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { domain } from "../../domain/domain";
+import { SelectChangeEvent } from "@mui/material";
 
 interface CarId {
   car_id: number;
@@ -42,40 +44,64 @@ const GuestDetail = () => {
   const [guestDetails, setGuestDetails] = useState<GuestDetailData | null>(
     null
   );
+  const [statusUpdates, setStatusUpdates] = useState<{ [key: number]: string }>(
+    {}
+  );
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchGuestDetails = async () => {
-      try {
-        const response = await axios.get(
-          `${domain}:8000/api/customers/detail/${guest_id}`
-        );
-        setGuestDetails(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching car details:", error);
-      }
-    };
+  const fetchGuestDetails = async () => {
+    try {
+      const response = await axios.get(
+        `${domain}:8000/api/customers/detail/${guest_id}`
+      );
+      setGuestDetails(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching car details:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchGuestDetails();
   }, [guest_id]);
 
   const handleDeleteGuest = async () => {
     try {
-      await axios.delete(`${domain}:8000//api/customers/delete/${guest_id}`);
-      navigate(-1); // 차량 삭제 후 홈페이지 또는 다른 페이지로 이동
+      await axios.delete(`${domain}:8000/api/customers/delete/${guest_id}`);
+      navigate(-1);
     } catch (error) {
       console.error("Error deleting guest:", error);
+    }
+  };
+
+  const handleModifyGuest = () => {
+    navigate(`/guest/modify/${guest_id}`);
+  };
+
+  const handleStatusChange = (
+    event: SelectChangeEvent<string>,
+    rentalId: number
+  ) => {
+    setStatusUpdates((prevUpdates) => ({
+      ...prevUpdates,
+      [rentalId]: event.target.value,
+    }));
+  };
+
+  const handleUpdateStatus = async (rentalId: number) => {
+    try {
+      await axios.patch(`${domain}:8000/api/customers/rentals/${rentalId}`, {
+        status: statusUpdates[rentalId],
+      });
+      await fetchGuestDetails();
+    } catch (error) {
+      console.error("Error updating rental status:", error);
     }
   };
 
   if (!guestDetails) {
     return <div>Loading...</div>;
   }
-
-  const handleModifyGuest = () => {
-    navigate(`/guest/modify/${guest_id}`);
-  };
 
   return (
     <Paper style={{ padding: "20px", margin: "20px" }}>
@@ -126,12 +152,8 @@ const GuestDetail = () => {
               guestDetails.rentals.map((rental) => (
                 <ListItem key={rental.rental_id}>
                   <ListItemText>
-                    {rental.car && (
-                      <>
-                        <div className="text-xl">{rental.car.brand}</div>
-                        <div>차량 ID: {rental.car.car_id}</div>
-                      </>
-                    )}
+                    <div className="text-xl">{rental.car.brand}</div>
+                    <div>차량 ID: {rental.car.car_id}</div>
                     <div>대여 시작 일자: {rental.start_date.slice(0, 10)}</div>
                     <div>대여 종료 일자: {rental.end_date.slice(0, 10)}</div>
                     <div>가격: {rental.total_amount}</div>
@@ -157,6 +179,27 @@ const GuestDetail = () => {
                           ? "반납 완료"
                           : rental.status}
                       </span>
+                    </div>
+                    <div>
+                      <Select
+                        value={statusUpdates[rental.rental_id] || rental.status}
+                        onChange={(event) =>
+                          handleStatusChange(event, rental.rental_id)
+                        }
+                        style={{ marginTop: "10px" }}
+                      >
+                        <MenuItem value="in_progress">대여 중</MenuItem>
+                        <MenuItem value="reserved">예약</MenuItem>
+                        <MenuItem value="returned">반납 완료</MenuItem>
+                      </Select>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleUpdateStatus(rental.rental_id)}
+                        style={{ marginTop: "10px", marginLeft: "10px" }}
+                      >
+                        상태 업데이트
+                      </Button>
                     </div>
                   </ListItemText>
                 </ListItem>
