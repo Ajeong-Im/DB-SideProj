@@ -190,7 +190,7 @@ const CarModify = () => {
                 name="availability"
               />
             }
-            label="Availability"
+            label="사용 가능 여부"
           />
           <FormControlLabel
             control={
@@ -200,7 +200,7 @@ const CarModify = () => {
                 name="airconditioner"
               />
             }
-            label="Air Conditioner"
+            label="에어컨"
           />
           <FormControlLabel
             control={
@@ -210,7 +210,7 @@ const CarModify = () => {
                 name="heatedseat"
               />
             }
-            label="Heated Seat"
+            label="온열 시트"
           />
           <FormControlLabel
             control={
@@ -220,7 +220,7 @@ const CarModify = () => {
                 name="sunroof"
               />
             }
-            label="Sunroof"
+            label="썬루프"
           />
           <FormControlLabel
             control={
@@ -230,7 +230,7 @@ const CarModify = () => {
                 name="navigation"
               />
             }
-            label="Navigation"
+            label="네비게이션"
           />
           <FormControlLabel
             control={
@@ -240,11 +240,11 @@ const CarModify = () => {
                 name="blackbox"
               />
             }
-            label="Blackbox"
+            label="블랙박스"
           />
         </FormGroup>
         <Button type="submit" variant="contained" color="primary">
-          Update Car
+          수정하기
         </Button>
       </form>
     </Paper>

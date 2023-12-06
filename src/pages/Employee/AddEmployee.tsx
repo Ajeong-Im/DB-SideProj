@@ -56,7 +56,7 @@ const AddEmployee = () => {
       <Typography variant="h4">직원 등록</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Name"
+          label="이름"
           name="name"
           value={employeeData.name}
           onChange={handleChange}
@@ -64,7 +64,7 @@ const AddEmployee = () => {
           margin="normal"
         />
         <TextField
-          label="Position"
+          label="직급"
           name="position"
           value={employeeData.position}
           onChange={handleChange}
@@ -72,7 +72,7 @@ const AddEmployee = () => {
           margin="normal"
         />
         <TextField
-          label="Phone Number"
+          label="전화번호"
           name="phone_number"
           value={employeeData.phone_number}
           onChange={handleChange}
@@ -88,7 +88,7 @@ const AddEmployee = () => {
           margin="normal"
         />
         <TextField
-          label="Bank Account"
+          label="계좌"
           name="bank_account.bank_account"
           value={employeeData.wage.bank_account}
           onChange={handleChange}
@@ -96,7 +96,7 @@ const AddEmployee = () => {
           margin="normal"
         />
         <TextField
-          label="Amount"
+          label="월급"
           name="bank_account.amount"
           value={employeeData.wage.amount}
           onChange={handleChange}

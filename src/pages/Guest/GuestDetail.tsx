@@ -196,7 +196,10 @@ const GuestDetail = () => {
                         variant="contained"
                         color="primary"
                         onClick={() => handleUpdateStatus(rental.rental_id)}
-                        style={{ marginTop: "10px", marginLeft: "10px" }}
+                        style={{
+                          marginTop: "10px",
+                          marginLeft: "10px",
+                        }}
                       >
                         상태 업데이트
                       </Button>
