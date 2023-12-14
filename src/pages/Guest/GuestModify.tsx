@@ -108,7 +108,7 @@ const GuestModify = () => {
           margin="normal"
         />
         <Button type="submit" variant="contained" color="primary">
-          Update Car
+          수정하기
         </Button>
       </form>
     </Paper>

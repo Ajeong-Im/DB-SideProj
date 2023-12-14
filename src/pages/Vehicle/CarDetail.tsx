@@ -68,11 +68,10 @@ const CarDetail = () => {
   const handleDeleteCar = async () => {
     try {
       await axios.delete(`${domain}:8000/api/cars/delete/${car_id}`);
-      navigate("/"); // 차량 삭제 후 홈페이지 또는 다른 페이지로 이동
+      navigate(-1);
     } catch (error) {
       console.error("Error deleting car:", error);
     }
-    navigate(`/office/${office_id}`);
   };
 
   const handleOpenMaintModal = () => {
@@ -153,7 +152,7 @@ const CarDetail = () => {
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
           <div className="flex items-center">
-            <h1 className="text-2xl">수리 이력</h1>
+            <h1 className="text-2xl">정비 이력</h1>
             <button
               type="button"
               onClick={handleOpenMaintModal}
